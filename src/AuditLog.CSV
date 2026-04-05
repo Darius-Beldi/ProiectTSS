@@ -1,0 +1,124 @@
+20/4/2025 14:11:07:Loaded Menu class
+20/4/2025 14:11:16:Logged in successfully for user: 2
+20/4/2025 14:11:16:Loaded User class
+20/4/2025 14:11:22:Loaded Card class
+20/4/2025 14:11:22:Loaded Card class
+20/4/2025 14:11:22:Loaded Card class
+20/4/2025 14:11:22:Card Updated Successfully with id: 2
+20/4/2025 14:11:24:Loaded AdressBook class
+20/4/2025 14:11:24:Read All AdressBooks from the user: 2
+20/4/2025 14:11:30:Transfer money succesfully from card: 1 to card: 5amount: 10
+20/4/2025 14:11:30:Loaded Transaction class
+20/4/2025 14:11:30:Transaction inserted with id: 3
+20/4/2025 14:11:49:Loaded Card class
+20/4/2025 14:11:49:Loaded Card class
+20/4/2025 14:11:49:Loaded Card class
+20/4/2025 14:11:49:Card Updated Successfully with id: 2
+20/4/2025 14:11:54:Loaded AdressBook class
+20/4/2025 14:11:54:Read All AdressBooks from the user: 2
+20/4/2025 14:11:59:Transfer money succesfully from card: 1 to card: 6amount: 100
+20/4/2025 14:11:59:Loaded Transaction class
+20/4/2025 14:11:59:Transaction inserted with id: 4
+20/4/2025 14:12:03:Loaded Card class
+20/4/2025 14:14:12:Loaded Menu class
+20/4/2025 14:14:17:Logged in successfully for user: 2
+20/4/2025 14:14:17:Loaded User class
+20/4/2025 14:14:23:Loaded Card class
+20/4/2025 14:15:26:Loaded Menu class
+20/4/2025 14:15:31:Logged in successfully for user: 2
+20/4/2025 14:15:31:Loaded User class
+20/4/2025 14:15:34:Loaded Card class
+20/4/2025 14:17:12:Loaded Menu class
+20/4/2025 14:17:18:Logged in successfully for user: 2
+20/4/2025 14:17:18:Loaded User class
+20/4/2025 14:17:20:Loaded Card class
+20/4/2025 14:17:20:Card Inserted Successfully with id: 7
+20/4/2025 14:17:31:Loaded Card class
+20/4/2025 14:17:31:Loaded Card class
+20/4/2025 14:17:31:Loaded Card class
+20/4/2025 14:17:31:Loaded Card class
+20/4/2025 14:17:31:Card Updated Successfully with id: 2
+20/4/2025 14:17:56:Loaded Menu class
+20/4/2025 14:18:01:Logged in successfully for user: 2
+20/4/2025 14:18:01:Loaded User class
+20/4/2025 14:18:30:Loaded AdressBook class
+20/4/2025 14:18:30:Inserted AdressBook with id : 2
+20/4/2025 14:18:33:Loaded Card class
+20/4/2025 14:18:33:Loaded Card class
+20/4/2025 14:18:33:Loaded Card class
+20/4/2025 14:18:33:Loaded Card class
+20/4/2025 14:18:33:Card Updated Successfully with id: 2
+20/4/2025 14:18:37:Loaded AdressBook class
+20/4/2025 14:18:37:Loaded AdressBook class
+20/4/2025 14:18:37:Read All AdressBooks from the user: 2
+8/5/2025 14:23:03:Loaded Menu class
+8/5/2025 14:23:29:Loaded User class
+8/5/2025 14:23:29:Added user 6
+8/5/2025 14:23:55:Logged in successfully for user: 6
+8/5/2025 14:23:55:Loaded User class
+8/5/2025 14:24:07:Card Updated Successfully with id: 6
+8/5/2025 14:24:12:Card Updated Successfully with id: 6
+8/5/2025 14:24:28:Loaded Card class
+8/5/2025 14:24:28:Card Inserted Successfully with id: 8
+8/5/2025 14:24:50:Loaded Card class
+8/5/2025 14:24:50:Card Updated Successfully with id: 6
+31/5/2025 14:56:22:Loaded Menu class
+31/5/2025 14:56:32:Loaded User class
+31/5/2025 14:56:32:Added user 7
+31/5/2025 14:56:34:Logged in successfully for user: 7
+31/5/2025 14:56:34:Loaded User class
+31/5/2025 15:07:07:Loaded Menu class
+31/5/2025 15:08:26:Loaded Menu class
+31/5/2025 15:14:37:Loaded Menu class
+31/5/2025 15:15:07:Loaded Menu class
+31/5/2025 15:16:16:Loaded Menu class
+31/5/2025 15:18:34:Loaded Menu class
+31/5/2025 15:19:16:Loaded Menu class
+31/5/2025 15:19:50:Loaded Menu class
+31/5/2025 15:22:04:Loaded Menu class
+31/5/2025 15:22:20:Loaded User class
+31/5/2025 15:22:20:Added user 5
+31/5/2025 15:23:02:Loaded Menu class
+31/5/2025 15:23:16:Logged in successfully for user: 1
+31/5/2025 15:23:16:Loaded User class
+31/5/2025 15:23:22:Loaded Card class
+31/5/2025 15:23:22:Loaded Card class
+31/5/2025 15:23:22:Card Updated Successfully with id: 1
+31/5/2025 15:23:35:Loaded Card class
+31/5/2025 15:23:35:Loaded Card class
+31/5/2025 15:23:35:Card Updated Successfully with id: 1
+31/5/2025 15:23:40:Loaded AdressBook class
+31/5/2025 15:23:40:Loaded AdressBook class
+31/5/2025 15:23:40:Read All AdressBooks from the user: 1
+31/5/2025 15:23:47:Transfer money succesfully from card: 0 to card: 1amount: 1000
+31/5/2025 15:23:47:Loaded Transaction class
+31/5/2025 15:24:29:Loaded Menu class
+31/5/2025 15:24:38:Logged in successfully for user: 1
+31/5/2025 15:24:38:Loaded User class
+31/5/2025 15:24:40:Loaded Card class
+31/5/2025 15:24:40:Loaded Card class
+31/5/2025 15:24:40:Card Updated Successfully with id: 1
+31/5/2025 15:24:45:Loaded Card class
+31/5/2025 15:24:45:Loaded Card class
+31/5/2025 15:24:45:Card Updated Successfully with id: 1
+31/5/2025 15:24:49:Loaded Card class
+31/5/2025 15:24:49:Loaded Card class
+31/5/2025 15:24:49:Card Updated Successfully with id: 1
+31/5/2025 15:35:33:Loaded Menu class
+4/6/2025 16:14:50:Loaded Menu class
+4/6/2025 16:15:07:Logged in successfully for user: 1
+4/6/2025 16:15:07:Loaded User class
+4/6/2025 16:21:44:Loaded Menu class
+4/6/2025 16:21:51:Logged in successfully for user: 1
+4/6/2025 16:21:51:Loaded User class
+4/6/2025 16:37:28:Loaded Menu class
+4/6/2025 16:37:35:Logged in successfully for user: 1
+4/6/2025 16:37:35:Loaded User class
+4/6/2025 16:37:41:Deleted all AdressBooks from the user: 1
+4/6/2025 16:40:12:Loaded Menu class
+4/6/2025 16:41:02:Loaded Menu class
+4/6/2025 16:41:11:Logged in successfully for user: 1
+4/6/2025 16:41:11:Loaded User class
+4/6/2025 16:41:16:Deleted all AdressBooks from the user: 1
+4/6/2025 16:41:16:Cards Deleted Successfully for the userId: 1
+4/6/2025 16:41:16:User  Deleted Successfully with id: 1
