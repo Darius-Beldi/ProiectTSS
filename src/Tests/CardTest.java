@@ -4,19 +4,10 @@ import Models.Card;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Clasă de teste pentru evaluarea metodelor specifice din Card.
- *
- * S-a utilizat constructorul alternativ (cel care nu generează Card nou și nu scrie în DB)
- * pentru a testa în principal metodele de afișare/detalii și comparare, asigurând
- * circuite și logici decizionale (ex. compareTo).
- */
 public class CardTest {
 
-    // ---------------------------------------------------------------------------------------------
-    // 1. Partiționare în clase de echivalență (Equivalence Class Partitioning)
-    // ---------------------------------------------------------------------------------------------
-    // Clasa de echivalență: Obiecte Card complet inițializate.
+   //partitionare in clase de echiv
+    // verific daca se face bine un card
     @Test
     public void testCard_EquivalencePartitioning() {
         Card card = new Card(1, 101, "Ion Popescu", "Card Salariu", 
@@ -27,10 +18,9 @@ public class CardTest {
         assertEquals("Card Salariu", card.getCardName(), "Numele cardului trebuie sa corespunda.");
     }
 
-    // ---------------------------------------------------------------------------------------------
-    // 2. Analiza valorilor de frontieră (Boundary Value Analysis)
-    // ---------------------------------------------------------------------------------------------
-    // Valorile de frontieră (pentru anul de expirare: minim 25, luna 1 sau 12).
+    // analiza valorilor de frontiera
+
+    // frontierele sunt 1 si 12 pentru luna
     @Test
     public void testCard_BoundaryValue_ExpirationDate() {
         Card cardLimitMin = new Card(1, 101, "Ion", "Min", "RO", "123", 1, 25, 0, 0);
@@ -40,9 +30,7 @@ public class CardTest {
         assertEquals(12, cardLimitMax.getMonth(), "Luna maxima de frontiera e 12.");
     }
 
-    // ---------------------------------------------------------------------------------------------
-    // 3. Acoperire la nivel de instrucțiune, decizie și condiție (Coverage)
-    // ---------------------------------------------------------------------------------------------
+    //acoperire la nivel de instrucțiune, decizie, condiție,
     @Test
     public void testCard_ShowDetails_Coverage() {
         Card card = new Card(1, 101, "Ion", "Card", "RO123", "456", 1, 26, 123, 100);
@@ -55,23 +43,21 @@ public class CardTest {
         assertTrue(details.contains("CVV: 123"));
     }
 
-    // ---------------------------------------------------------------------------------------------
-    // 4. Circuite independente (Independent Paths)
-    // ---------------------------------------------------------------------------------------------
+    // circuite independente
     @Test
     public void testCard_CompareTo_IndependentPaths() {
-        // Metoda compareTo are drumuri ce depind de rezultatul intern String.compareTo.
+        // verific compare to
         Card card1 = new Card(1, 101, "Ion", "Alpha", "RO1", "11", 1, 26, 1, 10);
         Card card2 = new Card(2, 102, "Ion", "Beta", "RO2", "22", 1, 26, 2, 20);
         Card card3 = new Card(3, 103, "Ion", "Alpha", "RO3", "33", 1, 26, 3, 30);
         
-        // Drumul unde this < o
+        // Drumul unde this < 0
         assertTrue(card1.compareTo(card2) < 0, "Alpha trebuie sa fie inainte de Beta.");
         
-        // Drumul unde this > o
+        // Drumul unde this > 0
         assertTrue(card2.compareTo(card1) > 0, "Beta trebuie sa fie dupa Alpha.");
         
-        // Drumul unde this == o
+        // Drumul unde this == 0
         assertEquals(0, card1.compareTo(card3), "Alpha trebuie sa fie egal cu Alpha.");
     }
 

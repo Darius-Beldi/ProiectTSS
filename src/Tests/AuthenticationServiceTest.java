@@ -6,26 +6,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.security.NoSuchAlgorithmException;
 
-/**
- * Clasă de teste pentru evaluarea funcționalității AuthenticationService.Crypt.
- */
 public class AuthenticationServiceTest {
 
-    // ---------------------------------------------------------------------------------------------
-    // 1. Partiționare în clase de echivalență (Equivalence Class Partitioning)
-    // ---------------------------------------------------------------------------------------------
-    // Clasa de echivalență 1: Șiruri de caractere valide (normale, alfanumerice).
+    //partiționare în clase de echivalență
+
+    // clasa 1, orice string
     @Test
     public void testCrypt_ValidString_EquivalencePartitioning() throws NoSuchAlgorithmException {
         String input = "parola123";
-        // Rezultatul așteptat calculat pentru MD5 "parola123"
-        //String expected = "05e54d8525b306b3e6d1f05908922cb0";
+
         String expected = "095b2626c9b6bad0eb89019ea6091bd9";
         String result = AuthenticationService.Crypt(input);
         assertEquals(expected, result, "Hash-ul generat nu corespunde clasei valide de date.");
     }
 
-    // Clasa de echivalență 2: Șiruri de caractere invalide (null).
+    // clasa 2 null
     @Test
     public void testCrypt_NullString_EquivalencePartitioning() {
         assertThrows(NullPointerException.class, () -> {
@@ -33,19 +28,18 @@ public class AuthenticationServiceTest {
         }, "Ar trebui sa se arunce NullPointerException pentru input null.");
     }
 
-    // ---------------------------------------------------------------------------------------------
-    // 2. Analiza valorilor de frontieră (Boundary Value Analysis)
-    // ---------------------------------------------------------------------------------------------
-    // Valoare de frontieră: șir cu lungime minimă posibilă (0 caractere - string vid).
+    //analiza valorilor de frontieră
+
+    // caz 1 lungime 0
     @Test
     public void testCrypt_EmptyString_BoundaryValue() throws NoSuchAlgorithmException {
         String input = "";
-        String expected = "d41d8cd98f00b204e9800998ecf8427e"; // MD5 standard pentru șir vid
+        String expected = "d41d8cd98f00b204e9800998ecf8427e";
         String result = AuthenticationService.Crypt(input);
         assertEquals(expected, result, "Hash-ul pentru limita inferioara (sir vid) este incorect.");
     }
 
-    // Valoare de frontieră imediat următoare: șir cu lungime 1.
+    // caz 2 lungime 1
     @Test
     public void testCrypt_SingleChar_BoundaryValue() throws NoSuchAlgorithmException {
         String input = "a";
@@ -54,31 +48,24 @@ public class AuthenticationServiceTest {
         assertEquals(expected, result, "Hash-ul pentru lungimea de frontiera 1 este incorect.");
     }
 
-    // ---------------------------------------------------------------------------------------------
-    // 3. Acoperire la nivel de instrucțiune, decizie și condiție (Statement, Decision, Condition)
-    // ---------------------------------------------------------------------------------------------
+    // acoperire la nivel de instrucțiune, decizie, condiție,
     @Test
     public void testCrypt_CoverageStrategies() throws NoSuchAlgorithmException {
-        // Stringul "test" produce un array de bytes în care se găsesc și valori <= 15, și valori > 15.
         // MD5("test") = 098f6bcd4621d373cade4e832627b4f6
-        // Primul byte e 09 -> intră în if (hex.length() == 1) => Statement Coverage pentru ramura True.
-        // Al doilea byte e 8f -> NU intră în if => Statement/Decision Coverage pentru ramura False.
-        // Condiția este simplă (o singură expresie logică), deci Condition Coverage este de asemenea 100%.
+        // Primul byte e 09 -> intra in if (hex.length() == 1) => Statement Coverage pentru ramura True.
+        // Al doilea byte e 8f -> NU intra in if => Statement/Decision Coverage pentru ramura False.
+        // Condiția este simpla (o singura expresie logica), deci Condition Coverage este de asemenea 100%.
         String input = "test";
         String expected = "098f6bcd4621d373cade4e832627b4f6";
         String result = AuthenticationService.Crypt(input);
         assertEquals(expected, result, "Strategiile de acoperire nu returneaza hash-ul corect.");
     }
 
-    // ---------------------------------------------------------------------------------------------
-    // 4. Circuite independente (Independent Paths)
-    // ---------------------------------------------------------------------------------------------
+    // circuite independente
     @Test
     public void testCrypt_IndependentPaths() throws NoSuchAlgorithmException {
-        // Fluxul de control pentru metoda Crypt conține o buclă for și un if interior.
-        // Drumul 1: Nu se intră în if (se evită hexString.append('0'))
-        // Drumul 2: Se intră în if (se execută hexString.append('0'))
-        // Folosind "test", generăm ambele căi independente posibile prin iterațiile succesive din buclă.
+        // Drumul 1: Nu se intra în if (se evita hexString.append('0'))
+        // Drumul 2: Se intra în if (se executa hexString.append('0'))
         String input = "test";
         String result = AuthenticationService.Crypt(input);
         assertNotNull(result);
