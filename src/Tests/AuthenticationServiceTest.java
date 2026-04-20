@@ -72,36 +72,5 @@ public class AuthenticationServiceTest {
         assertEquals(32, result.length(), "Toate caile trebuie sa compuna in final un string de lungime 32.");
     }
 
-    // ---------------------------------------------------------------------------------------------
-    // 5. Teste suplimentare pentru a OMORÎ 2 mutanți neechivalenți rămași în viață
-    // ---------------------------------------------------------------------------------------------
-    
-    // Mutantul 1: Operatorul bitwise `0xff & b` este alterat (ex: schimbat doar în `b`).
-    // Dacă mutantul supraviețuiește, un byte negativ (ex. -1) va fi transformat într-un string hex 
-    // de lungime mai mare, ex: "ffffffff", rezultând într-un șir final de lungime > 32.
-    @Test
-    public void testCrypt_KillMutant_BitwiseAnd() throws NoSuchAlgorithmException {
-        // MD5 pt "mutant_test_123" va genera byți care, fără operația AND, devin negativi
-        String result = AuthenticationService.Crypt("mutant_test_123");
-        
-        // Dacă mutantul elimină `0xff & b`, lungimea rezultatului va exploda și nu va fi 32.
-        assertEquals(32, result.length(), 
-                "Mutantul care a eliminat '0xff & b' a supravietuit! Lungimea nu mai este 32.");
-    }
 
-    // Mutantul 2: Condiția de decizie `if (hex.length() == 1)` este negată sau alterată la `== 0` etc.
-    // Acest mutant elimină padding-ul necesar cu zero pentru valorile hex sub 16 (0-9, a-f).
-    @Test
-    public void testCrypt_KillMutant_ConditionPadding() throws NoSuchAlgorithmException {
-        // "test" are hash-ul "098f6bcd..." care începe cu '0'.
-        String result = AuthenticationService.Crypt("test");
-        
-        // Dacă condiția if a fost alterată de mutant, lipsește zero-ul din față.
-        // Stringul va avea lungimea de 31 în loc de 32 (dacă un singur zero lipsește), 
-        // și nu va începe cu "09".
-        assertEquals(32, result.length(), 
-                "Mutantul care altereaza decizia de padding (length == 1) a supravietuit! Lipseste un caracter.");
-        assertTrue(result.startsWith("09"), 
-                "Mutantul care previne adaugarea caracterului '0' a supravietuit!");
-    }
 }

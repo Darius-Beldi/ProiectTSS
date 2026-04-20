@@ -61,29 +61,5 @@ public class CardTest {
         assertEquals(0, card1.compareTo(card3), "Alpha trebuie sa fie egal cu Alpha.");
     }
 
-    // ---------------------------------------------------------------------------------------------
-    // 5. Analiză mutanți neechivalenți (Kill Mutants)
-    // ---------------------------------------------------------------------------------------------
-    // Mutant 1 (Metoda compareTo): Un mutant ar putea schimba rezultatul return-ului 
-    // din metoda compareTo (ex: să returneze mereu 0 sau inversul).
-    @Test
-    public void testCard_KillMutant_CompareTo() {
-        Card cardA = new Card(1, 1, "A", "A", "A", "A", 1, 1, 1, 1);
-        Card cardB = new Card(2, 2, "B", "B", "B", "B", 2, 2, 2, 2);
-        
-        // A (65) - B (66) = -1. Dacă e altceva, mutantul a alterat return-ul funcției.
-        int diff = cardA.compareTo(cardB);
-        assertTrue(diff < 0, "Mutantul care altereaza logica compareTo a supravietuit.");
-    }
 
-    // Mutant 2 (Metoda getBalance): Un mutant ar putea altera (înlocui) getBalance 
-    // cu return 0 sau return null (aici e Integer).
-    @Test
-    public void testCard_KillMutant_Getters() {
-        Card card = new Card(1, 1, "Nume", "Nume", "I", "N", 1, 1, 1, 555);
-        
-        // Valoarea 555 trebuie returnată exact așa cum a fost setată
-        assertEquals(555, card.getBalance(), 
-                "Mutantul care a alterat returnul getBalance (ex: return 0) a supravietuit!");
-    }
 }

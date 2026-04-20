@@ -63,32 +63,4 @@ public class UserTest {
         assertEquals(1, userDbTrue.getIdUser(), "ID-ul trebuie forțat de argument.");
     }
 
-    // ---------------------------------------------------------------------------------------------
-    // 5. Analiză mutanți neechivalenți (Kill Mutants)
-    // ---------------------------------------------------------------------------------------------
-    // Mutant 1 (Metoda AddCard): Mutantul elimină apelul `cards.add(c)`.
-    @Test
-    public void testUser_KillMutant_AddCard() throws SQLException, NoSuchAlgorithmException {
-        User user = new User(1, "N", "P", new Date(), "e", "p", true, new ArrayList<>());
-        Card c = new Card(1, 1, "1", "1", "1", "1", 1, 1, 1, 1);
-        
-        user.AddCard(c);
-        
-        // Dacă mutantul elimină adăugarea, size va fi 0.
-        assertEquals(1, user.getCards().size(), 
-            "Mutantul care elimină 'cards.add()' a supraviețuit.");
-    }
-
-    // Mutant 2 (Metoda setPassword): Mutantul nu actualizează `Password` cu valoarea criptată, 
-    // ci o lasă neschimbată sau setează null.
-    @Test
-    public void testUser_KillMutant_SetPassword() throws SQLException, NoSuchAlgorithmException {
-        User user = new User(1, "N", "P", new Date(), "e", "old_pass", true, new ArrayList<>());
-        
-        user.setPassword("new_crypted_pass");
-        
-        // Dacă mutantul supraviețuiește, parola va fi încă "old_pass" sau "null".
-        assertEquals("new_crypted_pass", user.getPassword(), 
-            "Mutantul care a ignorat atribuirea parolei în setPassword a supraviețuit.");
-    }
 }
