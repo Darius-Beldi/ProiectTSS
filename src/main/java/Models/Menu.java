@@ -8,8 +8,6 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.*;
 
-import static Services.AuthenticationService.Crypt;
-
 public class Menu extends MenuStatements {
 
     private static boolean toInitializeDataBase = true;

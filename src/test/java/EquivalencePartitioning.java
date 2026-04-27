@@ -1,16 +1,10 @@
-package Tests.FunctionalTesting;
-
 import Models.Card;
-import Models.User;
 import Services.AuthenticationService;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 
 public class EquivalencePartitioning {

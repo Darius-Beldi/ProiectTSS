@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
 
 public class AuthenticationService extends MenuStatements {
 
@@ -59,12 +58,7 @@ public class AuthenticationService extends MenuStatements {
                         auditService.logAction("Logged in successfully for user: " +  id);
                         return new User(id, firstName, lastName, birthDate, userEmail, userPassword, true, new ArrayList<>());
                     }
-
-
-
-
                 }
-
             }
         }
         return null;

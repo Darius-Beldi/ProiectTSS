@@ -1,7 +1,6 @@
 package Services;
 
 import Connection.MenuStatements;
-import Models.Transaction;
 import Models.User;
 
 import java.security.NoSuchAlgorithmException;
