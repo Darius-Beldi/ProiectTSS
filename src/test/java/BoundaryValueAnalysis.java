@@ -1,5 +1,6 @@
 import Models.Card;
 import Models.User;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import java.security.NoSuchAlgorithmException;
@@ -11,6 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@Order(1)
 public class BoundaryValueAnalysis {
 
     // --- BVA for User.Crypt(String input) ---

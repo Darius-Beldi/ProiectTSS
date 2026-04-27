@@ -1,12 +1,16 @@
 import Models.Card;
 import Services.AuthenticationService;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
+import java.lang.reflect.Field;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
-
+@Order(2)
 public class EquivalencePartitioning {
 
 
@@ -30,13 +34,10 @@ public class EquivalencePartitioning {
 
     @Test
     public void testCard_Constructor_ValidName() throws SQLException, NoSuchAlgorithmException {
-
         String validName = "Debit Card";
-
-        Card card = new Card(1, validName);
-
-        assertNotNull(card, "Card object should not be null");
-        assertEquals(validName, card.getCardName(), "Card name should match the input");
+        Card card = new Card(1, 1, "Name", validName, "RO123", "12345678901234", 12, 25, 123, 200);
+        assertNotNull(card);
+        assertEquals(validName, card.getCardName());
     }
 
     @Test

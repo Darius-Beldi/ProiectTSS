@@ -3,6 +3,7 @@ import Models.User;
 import Services.AuthenticationService;
 import Services.AuditService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -24,7 +25,10 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import Connection.ConnectionString;
+import static org.mockito.Mockito.mock;
 
+@Order(3)
 public class CoverageTesting {
 
     @InjectMocks
@@ -53,6 +57,9 @@ public class CoverageTesting {
 
     @BeforeEach
     public void setUp() throws Exception {
+        Field connectionField = ConnectionString.class.getDeclaredField("c");
+        connectionField.setAccessible(true);
+        connectionField.set(null, mock(java.sql.Connection.class));
         MockitoAnnotations.openMocks(this);
 
         // Injectarea mock-urilor pentru field-urile statice din MenuStatements folosind reflexie
@@ -68,10 +75,6 @@ public class CoverageTesting {
 
     private void setStaticMock(Field field, Object mock) throws Exception {
         field.setAccessible(true);
-        // Eliminarea modificatorului 'final' pentru a putea seta valoarea
-        Field modifiersField = Field.class.getDeclaredField("modifiers");
-        modifiersField.setAccessible(true);
-        modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
         field.set(null, mock);
     }
 

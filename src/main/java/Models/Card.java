@@ -29,21 +29,23 @@ public class Card extends CardStatements implements Comparable<Card>{
     private UserService userService= new UserService();
 
     static {
-        try {
-            PreparedStatement selectStatement = c.prepareStatement("SELECT idCard FROM Cards ORDER BY idCard DESC LIMIT 1");
-            ResultSet rs = selectStatement.executeQuery();
-
-            if (rs.next()) {
-                generatedIdCard = rs.getInt(1);
-            } else {
-                generatedIdCard = 0; // No rows in the table
+        if (c != null) {
+            try {
+                PreparedStatement selectStatement = c.prepareStatement("SELECT idCard FROM Cards ORDER BY idCard DESC LIMIT 1");
+                ResultSet rs = selectStatement.executeQuery();
+                if (rs.next()) {
+                    generatedIdCard = rs.getInt(1);
+                } else {
+                    generatedIdCard = 0;
+                }
+                rs.close();
+                selectStatement.close();
+            } catch (SQLException e) {
+                generatedIdCard = 0;
+                e.printStackTrace();
             }
-
-            rs.close();
-            selectStatement.close();
-        } catch (SQLException e) {
+        } else {
             generatedIdCard = 0;
-            e.printStackTrace();
         }
     }
     {

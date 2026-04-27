@@ -28,22 +28,24 @@ public class  User extends UserStatements{
         cards = new ArrayList<>();
     }
     static {
-        userService =  new UserService();
-        try {
-            PreparedStatement selectStatement = c.prepareStatement("SELECT idUser FROM Users ORDER BY idUser DESC LIMIT 1");
-            ResultSet rs = selectStatement.executeQuery();
-
-            if (rs.next()) {
-                generatedIdUser = rs.getInt(1);
-            } else {
-                generatedIdUser = 0; // No rows in the table
+        userService = new UserService();
+        if (c != null) {
+            try {
+                PreparedStatement selectStatement = c.prepareStatement("SELECT idUser FROM Users ORDER BY idUser DESC LIMIT 1");
+                ResultSet rs = selectStatement.executeQuery();
+                if (rs.next()) {
+                    generatedIdUser = rs.getInt(1);
+                } else {
+                    generatedIdUser = 0;
+                }
+                rs.close();
+                selectStatement.close();
+            } catch (SQLException e) {
+                generatedIdUser = 0;
+                e.printStackTrace();
             }
-
-            rs.close();
-            selectStatement.close();
-        } catch (SQLException e) {
+        } else {
             generatedIdUser = 0;
-            e.printStackTrace(); // Consider logging the exception
         }
     }
 
