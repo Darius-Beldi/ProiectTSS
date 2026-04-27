@@ -33,26 +33,26 @@ public class EquivalencePartitioning {
 
     }
 
-    //TODO
-    // de implementat calumea
-    @Test
-    public void testCard_EquivalencePartitioning() {
-        Card card = new Card(1, 101, "Ion Popescu", "Card Salariu",
-                "RO123456789012345678901", "12345678901234", 12, 26, 123, 1000);
 
-        assertNotNull(card, "Card-ul creat nu trebuie să fie null.");
-        assertEquals("Ion Popescu", card.getName(), "Numele titularului trebuie sa corespunda.");
-        assertEquals("Card Salariu", card.getCardName(), "Numele cardului trebuie sa corespunda.");
+    @Test
+    public void testCard_Constructor_ValidName() throws SQLException, NoSuchAlgorithmException {
+
+        String validName = "Debit Card";
+
+        Card card = new Card(1, validName);
+
+        assertNotNull(card, "Card object should not be null");
+        assertEquals(validName, card.getCardName(), "Card name should match the input");
     }
 
     @Test
-    public void testUser_EquivalencePartitioning() throws SQLException, NoSuchAlgorithmException {
-        Date birthDate = new Date(95, 5, 10); // 10 Iunie 1995
-        List<Card> cards = new ArrayList<>();
-        User user = new User(1, "Ion", "Popescu", birthDate, "ion@test.com", "pass", true, cards);
+    public void testCard_Constructor_NullName() {
 
-        assertNotNull(user, "User creat trebuie sa fie nenul.");
-        assertEquals("Ion", user.getFirstName());
-        assertEquals("Popescu", user.getLastName());
+        String invalidName = null;
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Card(1, invalidName);
+        }, "Constructor should throw IllegalArgumentException for null name");
     }
+
 }
