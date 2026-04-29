@@ -199,5 +199,203 @@ public class CoverageTesting {
         assertNull(user);
         verify(auditService, never()).logAction(anyString());
     }
-    
+
+    @Test
+    public void testIsNullAllFieldsPresent() throws SQLException, NoSuchAlgorithmException {
+        // Arrange - all fields non-null → isNull() should return false
+        String email = "test@example.com";
+        String password = "password";
+        String hashedPassword = AuthenticationService.Crypt(password);
+        Date birthDate = new Date();
+
+        when(checkForExistingEmailStatement.executeQuery()).thenReturn(rsEmail);
+        when(rsEmail.next()).thenReturn(true);
+        when(rsEmail.getString(1)).thenReturn(email);
+
+        when(getPasswordStatement.executeQuery()).thenReturn(rsPassword);
+        when(rsPassword.next()).thenReturn(true);
+        when(rsPassword.getString(1)).thenReturn(hashedPassword);
+
+        when(getUserStatement.executeQuery()).thenReturn(rsUser);
+        when(rsUser.next()).thenReturn(true);
+        when(rsUser.getInt(1)).thenReturn(1);
+        when(rsUser.getString(2)).thenReturn("John");
+        when(rsUser.getString(3)).thenReturn("Doe");
+        when(rsUser.getDate(4)).thenReturn(new java.sql.Date(birthDate.getTime()));
+        when(rsUser.getString(5)).thenReturn(email);
+        when(rsUser.getString(6)).thenReturn(hashedPassword);
+
+        // Act
+        User user = authenticationService.login(email, password);
+
+        // Assert
+        assertNotNull(user);
+        assertEquals(false, user.isNull());
+    }
+
+    @Test
+    public void testIsNullFirstNameNull() throws SQLException, NoSuchAlgorithmException {
+        // Arrange - FirstName is null → isNull() should return true
+        String email = "test@example.com";
+        String password = "password";
+        String hashedPassword = AuthenticationService.Crypt(password);
+        Date birthDate = new Date();
+
+        when(checkForExistingEmailStatement.executeQuery()).thenReturn(rsEmail);
+        when(rsEmail.next()).thenReturn(true);
+        when(rsEmail.getString(1)).thenReturn(email);
+
+        when(getPasswordStatement.executeQuery()).thenReturn(rsPassword);
+        when(rsPassword.next()).thenReturn(true);
+        when(rsPassword.getString(1)).thenReturn(hashedPassword);
+
+        when(getUserStatement.executeQuery()).thenReturn(rsUser);
+        when(rsUser.next()).thenReturn(true);
+        when(rsUser.getInt(1)).thenReturn(1);
+        when(rsUser.getString(2)).thenReturn(null); // FirstName null
+        when(rsUser.getString(3)).thenReturn("Doe");
+        when(rsUser.getDate(4)).thenReturn(new java.sql.Date(birthDate.getTime()));
+        when(rsUser.getString(5)).thenReturn(email);
+        when(rsUser.getString(6)).thenReturn(hashedPassword);
+
+        // Act
+        User user = authenticationService.login(email, password);
+
+        // Assert
+        assertNotNull(user);
+        assertEquals(true, user.isNull());
+    }
+
+    @Test
+    public void testIsNullLastNameNull() throws SQLException, NoSuchAlgorithmException {
+        // Arrange - LastName is null → isNull() should return true
+        String email = "test@example.com";
+        String password = "password";
+        String hashedPassword = AuthenticationService.Crypt(password);
+        Date birthDate = new Date();
+
+        when(checkForExistingEmailStatement.executeQuery()).thenReturn(rsEmail);
+        when(rsEmail.next()).thenReturn(true);
+        when(rsEmail.getString(1)).thenReturn(email);
+
+        when(getPasswordStatement.executeQuery()).thenReturn(rsPassword);
+        when(rsPassword.next()).thenReturn(true);
+        when(rsPassword.getString(1)).thenReturn(hashedPassword);
+
+        when(getUserStatement.executeQuery()).thenReturn(rsUser);
+        when(rsUser.next()).thenReturn(true);
+        when(rsUser.getInt(1)).thenReturn(1);
+        when(rsUser.getString(2)).thenReturn("John");
+        when(rsUser.getString(3)).thenReturn(null); // LastName null
+        when(rsUser.getDate(4)).thenReturn(new java.sql.Date(birthDate.getTime()));
+        when(rsUser.getString(5)).thenReturn(email);
+        when(rsUser.getString(6)).thenReturn(hashedPassword);
+
+        // Act
+        User user = authenticationService.login(email, password);
+
+        // Assert
+        assertNotNull(user);
+        assertEquals(true, user.isNull());
+    }
+
+    @Test
+    public void testIsNullBirthDateNull() throws SQLException, NoSuchAlgorithmException {
+        // Arrange - BirthDate is null → isNull() should return true
+        String email = "test@example.com";
+        String password = "password";
+        String hashedPassword = AuthenticationService.Crypt(password);
+
+        when(checkForExistingEmailStatement.executeQuery()).thenReturn(rsEmail);
+        when(rsEmail.next()).thenReturn(true);
+        when(rsEmail.getString(1)).thenReturn(email);
+
+        when(getPasswordStatement.executeQuery()).thenReturn(rsPassword);
+        when(rsPassword.next()).thenReturn(true);
+        when(rsPassword.getString(1)).thenReturn(hashedPassword);
+
+        when(getUserStatement.executeQuery()).thenReturn(rsUser);
+        when(rsUser.next()).thenReturn(true);
+        when(rsUser.getInt(1)).thenReturn(1);
+        when(rsUser.getString(2)).thenReturn("John");
+        when(rsUser.getString(3)).thenReturn("Doe");
+        when(rsUser.getDate(4)).thenReturn(null); // BirthDate null
+        when(rsUser.getString(5)).thenReturn(email);
+        when(rsUser.getString(6)).thenReturn(hashedPassword);
+
+        // Act
+        User user = authenticationService.login(email, password);
+
+        // Assert
+        assertNotNull(user);
+        assertEquals(true, user.isNull());
+    }
+
+    @Test
+    public void testIsNullEmailNull() throws SQLException, NoSuchAlgorithmException {
+        // Arrange - Email is null → isNull() should return true
+        String email = "test@example.com";
+        String password = "password";
+        String hashedPassword = AuthenticationService.Crypt(password);
+        Date birthDate = new Date();
+
+        when(checkForExistingEmailStatement.executeQuery()).thenReturn(rsEmail);
+        when(rsEmail.next()).thenReturn(true);
+        when(rsEmail.getString(1)).thenReturn(email);
+
+        when(getPasswordStatement.executeQuery()).thenReturn(rsPassword);
+        when(rsPassword.next()).thenReturn(true);
+        when(rsPassword.getString(1)).thenReturn(hashedPassword);
+
+        when(getUserStatement.executeQuery()).thenReturn(rsUser);
+        when(rsUser.next()).thenReturn(true);
+        when(rsUser.getInt(1)).thenReturn(1);
+        when(rsUser.getString(2)).thenReturn("John");
+        when(rsUser.getString(3)).thenReturn("Doe");
+        when(rsUser.getDate(4)).thenReturn(new java.sql.Date(birthDate.getTime()));
+        when(rsUser.getString(5)).thenReturn(null); // Email null
+        when(rsUser.getString(6)).thenReturn(hashedPassword);
+
+        // Act
+        User user = authenticationService.login(email, password);
+
+        // Assert
+        assertNotNull(user);
+        assertEquals(true, user.isNull());
+    }
+
+    @Test
+    public void testIsNullPasswordNull() throws SQLException, NoSuchAlgorithmException {
+        // Arrange - Password is null → isNull() should return true
+        String email = "test@example.com";
+        String password = "password";
+        String hashedPassword = AuthenticationService.Crypt(password);
+        Date birthDate = new Date();
+
+        when(checkForExistingEmailStatement.executeQuery()).thenReturn(rsEmail);
+        when(rsEmail.next()).thenReturn(true);
+        when(rsEmail.getString(1)).thenReturn(email);
+
+        when(getPasswordStatement.executeQuery()).thenReturn(rsPassword);
+        when(rsPassword.next()).thenReturn(true);
+        when(rsPassword.getString(1)).thenReturn(hashedPassword);
+
+        when(getUserStatement.executeQuery()).thenReturn(rsUser);
+        when(rsUser.next()).thenReturn(true);
+        when(rsUser.getInt(1)).thenReturn(1);
+        when(rsUser.getString(2)).thenReturn("John");
+        when(rsUser.getString(3)).thenReturn("Doe");
+        when(rsUser.getDate(4)).thenReturn(new java.sql.Date(birthDate.getTime()));
+        when(rsUser.getString(5)).thenReturn(email);
+        when(rsUser.getString(6)).thenReturn(null); // Password null
+
+        // Act
+        User user = authenticationService.login(email, password);
+
+        // Assert
+        assertNotNull(user);
+        assertEquals(true, user.isNull());
+    }
+
+
 }

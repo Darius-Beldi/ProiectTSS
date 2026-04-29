@@ -110,6 +110,12 @@ public class  User extends UserStatements{
         return hexString.toString();
     }
 
+    public boolean isNull(){
+        if (FirstName == null || LastName == null || BirthDate == null || Email == null || Password == null)
+            return true;
+        else
+            return false;
+    }
 
     public  Integer getIdUser() {
         return idUser;
