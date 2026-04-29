@@ -1,4 +1,5 @@
 # ProiectTSS
+_Note: The project is docuemnted in the [wiki](https://github.com/Darius-Beldi/ProiectTSS/wiki) section of the repository_
 # Description
 This project is written in ```Java 26``` using Maven build tool. 
 
