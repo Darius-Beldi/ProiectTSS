@@ -199,4 +199,5 @@ public class CoverageTesting {
         assertNull(user);
         verify(auditService, never()).logAction(anyString());
     }
+    
 }
