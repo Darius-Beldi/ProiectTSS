@@ -33,21 +33,176 @@ public class EquivalencePartitioning {
 
 
     @Test
-    public void testCard_Constructor_ValidName() throws SQLException, NoSuchAlgorithmException {
-        String validName = "Debit Card";
-        Card card = new Card(1, 1, "Name", validName, "RO123", "12345678901234", 12, 25, 123, 200);
+    public void testCard_Constructor_Valid() {
+        Card card = new Card(1, 1, "Debit", "Debit Card",
+                "RO49AAAA1B31007593840000", "1234567890123456",
+                12, 25, 123, 200.0);
         assertNotNull(card);
-        assertEquals(validName, card.getCardName());
+        assertEquals(1,       card.getIdCard());
+        assertEquals(1,       card.getUserId());
+        assertEquals("Debit", card.getType());
+        assertEquals("Debit Card", card.getCardName());
+        assertEquals("RO49AAAA1B31007593840000", card.getIban());
+        assertEquals("1234567890123456", card.getNumber());
+        assertEquals(12,    card.getMonth());
+        assertEquals(25,    card.getYear());
+        assertEquals(123,   card.getCvv());
+        assertEquals(200.0, card.getLimit(), 0.001);
     }
-
+ 
+ 
     @Test
-    public void testCard_Constructor_NullName() {
-
-        String invalidName = null;
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Card(1, invalidName);
-        }, "Constructor should throw IllegalArgumentException for null name");
+    public void testCard_Constructor_InvalidId() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Card(0, 1, "Debit", "Debit Card",
+                        "RO49AAAA1B31007593840000", "1234567890123456",
+                        12, 25, 123, 200.0),
+                "id <= 0 trebuie sa arunce IllegalArgumentException");
     }
+ 
+ 
+    @Test
+    public void testCard_Constructor_InvalidUserId() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Card(1, -1, "Debit", "Debit Card",
+                        "RO49AAAA1B31007593840000", "1234567890123456",
+                        12, 25, 123, 200.0),
+                "userId <= 0 trebuie sa arunce IllegalArgumentException");
+    }
+ 
+ 
+    @Test
+    public void testCard_Constructor_NullType() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Card(1, 1, null, "Debit Card",
+                        "RO49AAAA1B31007593840000", "1234567890123456",
+                        12, 25, 123, 200.0),
+                "type null trebuie sa arunce IllegalArgumentException");
+    }
+ 
+    @Test
+    public void testCard_Constructor_EmptyType() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Card(1, 1, "", "Debit Card",
+                        "RO49AAAA1B31007593840000", "1234567890123456",
+                        12, 25, 123, 200.0),
+                "type gol trebuie sa arunce IllegalArgumentException");
+    }
+ 
+ 
+    @Test
+    public void testCard_Constructor_NullCardName() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Card(1, 1, "Debit", null,
+                        "RO49AAAA1B31007593840000", "1234567890123456",
+                        12, 25, 123, 200.0),
+                "cardName null trebuie sa arunce IllegalArgumentException");
+    }
+ 
+    @Test
+    public void testCard_Constructor_EmptyCardName() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Card(1, 1, "Debit", "",
+                        "RO49AAAA1B31007593840000", "1234567890123456",
+                        12, 25, 123, 200.0),
+                "cardName gol trebuie sa arunce IllegalArgumentException");
+    }
+ 
+ 
+    @Test
+    public void testCard_Constructor_NullIban() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Card(1, 1, "Debit", "Debit Card",
+                        null, "1234567890123456",
+                        12, 25, 123, 200.0),
+                "iban null trebuie sa arunce IllegalArgumentException");
+    }
+ 
+    @Test
+    public void testCard_Constructor_EmptyIban() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Card(1, 1, "Debit", "Debit Card",
+                        "", "1234567890123456",
+                        12, 25, 123, 200.0),
+                "iban gol trebuie sa arunce IllegalArgumentException");
+    }
+ 
+ 
+    @Test
+    public void testCard_Constructor_NullNumber() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Card(1, 1, "Debit", "Debit Card",
+                        "RO49AAAA1B31007593840000", null,
+                        12, 25, 123, 200.0),
+                "number null trebuie sa arunce IllegalArgumentException");
+    }
+ 
+    @Test
+    public void testCard_Constructor_InvalidNumberLength() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Card(1, 1, "Debit", "Debit Card",
+                        "RO49AAAA1B31007593840000", "1234567890",
+                        12, 25, 123, 200.0),
+                "number cu lungime != 16 trebuie sa arunce IllegalArgumentException");
+    }
+ 
+ 
+    @Test
+    public void testCard_Constructor_MonthTooLow() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Card(1, 1, "Debit", "Debit Card",
+                        "RO49AAAA1B31007593840000", "1234567890123456",
+                        0, 25, 123, 200.0),
+                "month < 1 trebuie sa arunce IllegalArgumentException");
+    }
+ 
+    @Test
+    public void testCard_Constructor_MonthTooHigh() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Card(1, 1, "Debit", "Debit Card",
+                        "RO49AAAA1B31007593840000", "1234567890123456",
+                        13, 25, 123, 200.0),
+                "month > 12 trebuie sa arunce IllegalArgumentException");
+    }
+ 
+ 
+    @Test
+    public void testCard_Constructor_NegativeYear() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Card(1, 1, "Debit", "Debit Card",
+                        "RO49AAAA1B31007593840000", "1234567890123456",
+                        12, -1, 123, 200.0),
+                "year negativ trebuie sa arunce IllegalArgumentException");
+    }
+ 
+ 
+    @Test
+    public void testCard_Constructor_CvvTooLow() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Card(1, 1, "Debit", "Debit Card",
+                        "RO49AAAA1B31007593840000", "1234567890123456",
+                        12, 25, 99, 200.0),
+                "cvv < 100 trebuie sa arunce IllegalArgumentException");
+    }
+ 
+    @Test
+    public void testCard_Constructor_CvvTooHigh() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Card(1, 1, "Debit", "Debit Card",
+                        "RO49AAAA1B31007593840000", "1234567890123456",
+                        12, 25, 1000, 200.0),
+                "cvv > 999 trebuie sa arunce IllegalArgumentException");
+    }
+ 
+ 
+    @Test
+    public void testCard_Constructor_NegativeLimit() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Card(1, 1, "Debit", "Debit Card",
+                        "RO49AAAA1B31007593840000", "1234567890123456",
+                        12, 25, 123, -1.0),
+                "limit negativa trebuie sa arunce IllegalArgumentException");
+    }
+
 
 }
