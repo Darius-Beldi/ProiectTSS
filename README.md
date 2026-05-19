@@ -40,7 +40,7 @@ The external libraries used, and imported through Maven are :
 public static String Crypt(String input) throws NoSuchAlgorithmException 
 ```
 ### Equivalence partitioning classes
-
+*Se testează o funcție care primește un șir de caractere și returnează hash-ul său MD5 sub forma unui șir hexadecimal de lungime fixă. Funcția acceptă orice `String` nenul ca intrare validă și produce un rezultat determinist. Dacă șirul de intrare este `null`, funcția nu îl poate procesa.*
 **Datele de intrare:** 
 - un ```String```
 
