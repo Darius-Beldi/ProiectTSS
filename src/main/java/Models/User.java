@@ -40,9 +40,8 @@ public class  User extends UserStatements{
                 }
                 rs.close();
                 selectStatement.close();
-            } catch (SQLException e) {
+            } catch (Exception e) {  // <-- Exception, nu doar SQLException
                 generatedIdUser = 0;
-                e.printStackTrace();
             }
         } else {
             generatedIdUser = 0;
