@@ -2,7 +2,8 @@
 _Note: The project is docuemnted in the [wiki](https://github.com/Darius-Beldi/ProiectTSS/wiki) section of the repository_
 # Description
 This project is written in ```Java 26``` using Maven build tool. 
-
+# Results
+[Click here!](https://htmlpreview.github.io/?https://github.com/Darius-Beldi/ProiectTSS/blob/main/Test%20Results%20-%20java_in_BankingApp.html)
 
 # Dependencies
 The external libraries used, and imported through Maven are : 
