@@ -87,6 +87,7 @@ public class Card extends CardStatements implements Comparable<Card>{
 
     }
 
+
     private String generateIBAN() throws SQLException {
 
         while(true){
@@ -177,6 +178,9 @@ public class Card extends CardStatements implements Comparable<Card>{
         return Balance;
     }
 
+    public Integer getUserId() {return idUser;}
+
+
     public String ShowDetails(){
        String details = "";
         details += "IBAN: " + IBAN + "\n";
@@ -192,4 +196,6 @@ public class Card extends CardStatements implements Comparable<Card>{
     public int compareTo(Card o) {
         return this.CardName.compareTo(o.CardName);
     }
+
+
 }

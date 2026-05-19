@@ -2,6 +2,7 @@ Connection\UserStatements.class
 Connection\CardStatements.class
 Connection\TransactionStatements.class
 Connection\AdressBookStatements.class
+Models\UserValidator.class
 Services\TransactionService.class
 Models\AdressBook.class
 Models\Transaction.class

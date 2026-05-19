@@ -15,7 +15,7 @@ public class ConnectionString<Connection> {
         try {
             c = DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            c = null;
         }
     }
 

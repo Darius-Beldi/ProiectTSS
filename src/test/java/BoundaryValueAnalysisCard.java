@@ -15,7 +15,7 @@ public class BoundaryValueAnalysisCard {
     private static final int    VALID_MONTH  = 6;
     private static final int    VALID_YEAR   = 25;
     private static final int    VALID_CVV    = 500;
-    private static final double VALID_LIMIT  = 200.0;
+    private static final int  VALID_LIMIT  = 200;
 
     
 
@@ -98,7 +98,7 @@ public class BoundaryValueAnalysisCard {
         Card card = new Card(VALID_ID, VALID_UID, VALID_TYPE, VALID_NAME,
                 VALID_IBAN, VALID_NUMBER,
                 VALID_MONTH, VALID_YEAR, 100, VALID_LIMIT);
-        assertEquals(100, card.getCvv());
+        assertEquals(100, card.getCVV());
     }
 
     @Test
@@ -107,7 +107,7 @@ public class BoundaryValueAnalysisCard {
         Card card = new Card(VALID_ID, VALID_UID, VALID_TYPE, VALID_NAME,
                 VALID_IBAN, VALID_NUMBER,
                 VALID_MONTH, VALID_YEAR, 101, VALID_LIMIT);
-        assertEquals(101, card.getCvv());
+        assertEquals(101, card.getCVV());
     }
 
     @Test
@@ -116,7 +116,7 @@ public class BoundaryValueAnalysisCard {
         Card card = new Card(VALID_ID, VALID_UID, VALID_TYPE, VALID_NAME,
                 VALID_IBAN, VALID_NUMBER,
                 VALID_MONTH, VALID_YEAR, 998, VALID_LIMIT);
-        assertEquals(998, card.getCvv());
+        assertEquals(998, card.getCVV());
     }
 
     @Test
@@ -125,7 +125,7 @@ public class BoundaryValueAnalysisCard {
         Card card = new Card(VALID_ID, VALID_UID, VALID_TYPE, VALID_NAME,
                 VALID_IBAN, VALID_NUMBER,
                 VALID_MONTH, VALID_YEAR, 999, VALID_LIMIT);
-        assertEquals(999, card.getCvv());
+        assertEquals(999, card.getCVV());
     }
 
     @Test
@@ -271,7 +271,7 @@ public class BoundaryValueAnalysisCard {
         assertThrows(IllegalArgumentException.class, () ->
                 new Card(VALID_ID, VALID_UID, VALID_TYPE, VALID_NAME,
                         VALID_IBAN, VALID_NUMBER,
-                        VALID_MONTH, VALID_YEAR, VALID_CVV, -0.01));
+                        VALID_MONTH, VALID_YEAR, VALID_CVV, -01));
     }
 
     @Test
@@ -279,8 +279,8 @@ public class BoundaryValueAnalysisCard {
 
         Card card = new Card(VALID_ID, VALID_UID, VALID_TYPE, VALID_NAME,
                 VALID_IBAN, VALID_NUMBER,
-                VALID_MONTH, VALID_YEAR, VALID_CVV, 0.0);
-        assertEquals(0.0, card.getLimit(), 0.001);
+                VALID_MONTH, VALID_YEAR, VALID_CVV, 0);
+        assertEquals(0, card.getBalance(), 001);
     }
 
     @Test
@@ -288,7 +288,7 @@ public class BoundaryValueAnalysisCard {
 
         Card card = new Card(VALID_ID, VALID_UID, VALID_TYPE, VALID_NAME,
                 VALID_IBAN, VALID_NUMBER,
-                VALID_MONTH, VALID_YEAR, VALID_CVV, 0.01);
-        assertEquals(0.01, card.getLimit(), 0.001);
+                VALID_MONTH, VALID_YEAR, VALID_CVV, 1);
+        assertEquals(1, card.getBalance());
     }
 }
