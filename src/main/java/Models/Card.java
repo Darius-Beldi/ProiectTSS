@@ -72,7 +72,7 @@ public class Card extends CardStatements implements Comparable<Card>{
         cardService.insertIntoDatabase(this);
     }
 //            Card c = new Card(id, idUser, Name, cardName, IBAN, Number, Month, Year, CVV, Balance);
-    public Card(Integer id, Integer idUser, String name, String cardName, String iban, String number, Integer month, Integer year, Integer cvv, Integer balance, Double) {
+    public Card(Integer id, Integer idUser, String name, String cardName, String iban, String number, Integer month, Integer year, Integer cvv, Integer balance) {
 
         idCard = id;
         this.idUser = idUser;
