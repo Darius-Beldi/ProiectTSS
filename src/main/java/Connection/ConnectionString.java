@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class ConnectionString<Connection> {
 
-    protected static String url = "jdbc:mysql://localhost:3306/bankingapp";
-    protected static String user = "root";
-    protected static String password = "parola";
+    protected static String url = "jdbc:mysql://sql7.freesqldatabase.com:3306/sql7827411";
+    protected static String user = "sql7827411";
+    protected static String password = "BI9N3uqXNu";
     protected static java.sql.Connection c;
 
     static {
