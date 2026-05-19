@@ -472,3 +472,120 @@ The conditional coverage tests are the following :
 - ```testIsNullBirthDateNull()```
 - ```testIsNullEmailNull()```
 - ```testIsNullPasswordNull()```
+
+
+# Circuite Independente
+
+Pentru testarea pe circuite independente am ales functia ```AuthenticationService.login(String email, String password)```.
+
+## Complexitatea ciclomatica
+
+V(G) = E − N + 2 = 14 − 10 + 2 = **6**
+
+Setul de baza contine 6 circuite independente.
+
+## Setul de baza
+
+| # | Circuit | Cazul testat |
+| --- | --- | --- |
+| **a** | N1, N2, N3, N4, N5, N6, N7, N8, exit | login reusit |
+| **b** | N1, N2, N4, N9, exit | email inexistent |
+| **c** | N1, N2, N3, N4, N9, exit | email gasit dar nu corespunde |
+| **d** | N1, N2, N3, N4, N5, N9, exit | nu exista parola in tabela |
+| **e** | N1, N2, N3, N4, N5, N6, N9, exit | parola gresita |
+| **f** | N1, N2, N3, N4, N5, N6, N7, N9, exit | parola corecta dar user inexistent |
+
+## Testele JUnit corespunzatoare
+
+```java
+@Test
+public void circuit_a_loginSuccess() throws Exception {
+    String email = "test@example.com";
+    String password = "password";
+    String hashedPassword = AuthenticationService.Crypt(password);
+
+    when(checkForExistingEmailStatement.executeQuery()).thenReturn(rsEmail);
+    when(rsEmail.next()).thenReturn(true);
+    when(rsEmail.getString(1)).thenReturn(email);
+
+    when(getPasswordStatement.executeQuery()).thenReturn(rsPassword);
+    when(rsPassword.next()).thenReturn(true);
+    when(rsPassword.getString(1)).thenReturn(hashedPassword);
+
+    when(getUserStatement.executeQuery()).thenReturn(rsUser);
+    when(rsUser.next()).thenReturn(true);
+    when(rsUser.getInt(1)).thenReturn(1);
+    when(rsUser.getString(2)).thenReturn("John");
+    when(rsUser.getString(3)).thenReturn("Doe");
+    when(rsUser.getDate(4)).thenReturn(new java.sql.Date(new Date().getTime()));
+    when(rsUser.getString(5)).thenReturn(email);
+    when(rsUser.getString(6)).thenReturn(hashedPassword);
+
+    assertNotNull(authenticationService.login(email, password));
+}
+
+@Test
+public void circuit_b_emailNotFound() throws Exception {
+    when(checkForExistingEmailStatement.executeQuery()).thenReturn(rsEmail);
+    when(rsEmail.next()).thenReturn(false);
+
+    assertNull(authenticationService.login("test@example.com", "password"));
+}
+
+@Test
+public void circuit_c_emailMismatch() throws Exception {
+    when(checkForExistingEmailStatement.executeQuery()).thenReturn(rsEmail);
+    when(rsEmail.next()).thenReturn(true);
+    when(rsEmail.getString(1)).thenReturn("other@example.com");
+
+    assertNull(authenticationService.login("test@example.com", "password"));
+}
+
+@Test
+public void circuit_d_passwordResultNotAvailable() throws Exception {
+    String email = "test@example.com";
+
+    when(checkForExistingEmailStatement.executeQuery()).thenReturn(rsEmail);
+    when(rsEmail.next()).thenReturn(true);
+    when(rsEmail.getString(1)).thenReturn(email);
+
+    when(getPasswordStatement.executeQuery()).thenReturn(rsPassword);
+    when(rsPassword.next()).thenReturn(false);
+
+    assertNull(authenticationService.login(email, "password"));
+}
+
+@Test
+public void circuit_e_wrongPassword() throws Exception {
+    String email = "test@example.com";
+
+    when(checkForExistingEmailStatement.executeQuery()).thenReturn(rsEmail);
+    when(rsEmail.next()).thenReturn(true);
+    when(rsEmail.getString(1)).thenReturn(email);
+
+    when(getPasswordStatement.executeQuery()).thenReturn(rsPassword);
+    when(rsPassword.next()).thenReturn(true);
+    when(rsPassword.getString(1)).thenReturn(AuthenticationService.Crypt("alta_parola"));
+
+    assertNull(authenticationService.login(email, "password"));
+}
+
+@Test
+public void circuit_f_userNotFoundAfterPasswordMatch() throws Exception {
+    String email = "test@example.com";
+    String hashedPassword = AuthenticationService.Crypt("password");
+
+    when(checkForExistingEmailStatement.executeQuery()).thenReturn(rsEmail);
+    when(rsEmail.next()).thenReturn(true);
+    when(rsEmail.getString(1)).thenReturn(email);
+
+    when(getPasswordStatement.executeQuery()).thenReturn(rsPassword);
+    when(rsPassword.next()).thenReturn(true);
+    when(rsPassword.getString(1)).thenReturn(hashedPassword);
+
+    when(getUserStatement.executeQuery()).thenReturn(rsUser);
+    when(rsUser.next()).thenReturn(false);
+
+    assertNull(authenticationService.login(email, "password"));
+}
+```
