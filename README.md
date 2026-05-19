@@ -2,22 +2,37 @@
 _Note: The project is docuemnted in the [wiki](https://github.com/Darius-Beldi/ProiectTSS/wiki) section of the repository_
 # Description
 This project is written in ```Java 26``` using Maven build tool. 
+
+
+BankingApp is a simple Java console application for simulating basic banking functionalities, including user registration and login, card management, money transfers, and transaction history. It uses a MySQL database for persistent storage and logs actions for auditing purposes.
+
+###  Features
+
+- **User Registration & Login:** Create an account or log in with your credentials.
+- **Card Management:** Create and view cards associated with your account.
+- **Money Transfers:** Transfer money between cards, including to contacts in your address book.
+- **Transaction History:** View incoming and outgoing transactions for your cards.
+- **Address Book:** Manage a list of contacts for easy transfers.
+- **Audit Logging:** Every action is recorded in an audit log for traceability.
+- **Database Initialization:** Option to initialize and populate the database with default data.
+
+---
 # Results
 [Click here!](https://htmlpreview.github.io/?https://github.com/Darius-Beldi/ProiectTSS/blob/main/Test%20Results%20-%20java_in_BankingApp.html)
-
+---
 # Dependencies
 The external libraries used, and imported through Maven are : 
 - ```JUnit 5.1.0.2```, the framework used to run the tests
 - ```Mockito 5.14.2```, the framework that allowed creating mocks of classes to bypass the database queries 
 - ```Pitest 1.16.1```, the frameworkt that allows the mutation testing
-
+---
 # Sources used 
 - [Junit Documentation ](https://junit.org/)
 - [Maven Documentation](https://junit.org/)
 - [Mockito Documentation](https://site.mockito.org/) 
 - [Lecture Courses](https://drive.google.com/drive/folders/1EiuA624AToiUkGclPsycoJBkwlwuSvEN)
 
-
+---
 
 # Functional Testing 
 ## Function 1
