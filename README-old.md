@@ -26,7 +26,7 @@ The external libraries used, and imported through Maven are :
 
 
 
-# Structural Testing 
+# Functional Testing 
 ## Function 1
 ```java
 public static String Crypt(String input) throws NoSuchAlgorithmException 
@@ -91,7 +91,7 @@ public static String Crypt(String input) throws NoSuchAlgorithmException
 
 # Function 2 : 
 ```java
-Card(int id, int userId, String type, String cardName, String iban, String number, int month, int year, int cvv, double limit)
+Card(int id, int userId, String type, String cardName, String iban, String number, int month, int year, int cvv, int limit)
 ```
 ### Equivalence partitioning classes
 
@@ -108,7 +108,7 @@ Există 10 intrări:
 - `month` — luna de expirare, în intervalul `[1..12]` (`int`)
 - `year` — anul de expirare, valoare pozitivă (`int`)
 - `cvv` — codul de securitate de 3 cifre, în intervalul `[100..999]` (`int`)
-- `limit` — limita de cheltuieli, valoare non-negativă (`double`)
+- `limit` — limita de cheltuieli, valoare non-negativă (`int`)
 
 ---
 
@@ -206,23 +206,23 @@ Clasele globale se obțin combinând clasele individuale, cu constrângerea că 
 
 | Clasă globală | Combinație | Reprezentant `(id, userId, type, cardName, iban, number, month, year, cvv, limit)` | Rezultat așteptat |
 |---------------|------------|------------------------------------------------------------------------------------|-------------------|
-| **C_valid** | ID₁ UID₁ T₁ CN₁ IB₁ NR₁ M₁ Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 123, 200.0)` | Card creat corect |
-| **C_id** | **ID₂** UID₁ T₁ CN₁ IB₁ NR₁ M₁ Y₁ CVV₁ LIM₁ | `(0, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 123, 200.0)` | `IllegalArgumentException` |
-| **C_uid** | ID₁ **UID₂** T₁ CN₁ IB₁ NR₁ M₁ Y₁ CVV₁ LIM₁ | `(1, -1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 123, 200.0)` | `IllegalArgumentException` |
-| **C_tnull** | ID₁ UID₁ **T₂** CN₁ IB₁ NR₁ M₁ Y₁ CVV₁ LIM₁ | `(1, 1, null, "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 123, 200.0)` | `IllegalArgumentException` |
-| **C_tempty** | ID₁ UID₁ **T₃** CN₁ IB₁ NR₁ M₁ Y₁ CVV₁ LIM₁ | `(1, 1, "", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 123, 200.0)` | `IllegalArgumentException` |
-| **C_cnnull** | ID₁ UID₁ T₁ **CN₂** IB₁ NR₁ M₁ Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", null, "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 123, 200.0)` | `IllegalArgumentException` |
-| **C_cnempty** | ID₁ UID₁ T₁ **CN₃** IB₁ NR₁ M₁ Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", "", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 123, 200.0)` | `IllegalArgumentException` |
-| **C_ibnull** | ID₁ UID₁ T₁ CN₁ **IB₂** NR₁ M₁ Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", "Debit Card", null, "1234567890123456", 12, 25, 123, 200.0)` | `IllegalArgumentException` |
-| **C_ibempty** | ID₁ UID₁ T₁ CN₁ **IB₃** NR₁ M₁ Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", "Debit Card", "", "1234567890123456", 12, 25, 123, 200.0)` | `IllegalArgumentException` |
-| **C_nrnull** | ID₁ UID₁ T₁ CN₁ IB₁ **NR₂** M₁ Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", null, 12, 25, 123, 200.0)` | `IllegalArgumentException` |
-| **C_nrlen** | ID₁ UID₁ T₁ CN₁ IB₁ **NR₃** M₁ Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890", 12, 25, 123, 200.0)` | `IllegalArgumentException` |
-| **C_mlow** | ID₁ UID₁ T₁ CN₁ IB₁ NR₁ **M₂** Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 0, 25, 123, 200.0)` | `IllegalArgumentException` |
-| **C_mhigh** | ID₁ UID₁ T₁ CN₁ IB₁ NR₁ **M₃** Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 13, 25, 123, 200.0)` | `IllegalArgumentException` |
-| **C_yneg** | ID₁ UID₁ T₁ CN₁ IB₁ NR₁ M₁ **Y₂** CVV₁ LIM₁ | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, -1, 123, 200.0)` | `IllegalArgumentException` |
-| **C_cvvlow** | ID₁ UID₁ T₁ CN₁ IB₁ NR₁ M₁ Y₁ **CVV₂** LIM₁ | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 99, 200.0)` | `IllegalArgumentException` |
-| **C_cvvhigh** | ID₁ UID₁ T₁ CN₁ IB₁ NR₁ M₁ Y₁ **CVV₃** LIM₁ | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 1000, 200.0)` | `IllegalArgumentException` |
-| **C_limneg** | ID₁ UID₁ T₁ CN₁ IB₁ NR₁ M₁ Y₁ CVV₁ **LIM₂** | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 123, -1.0)` | `IllegalArgumentException` |
+| **C_valid** | ID₁ UID₁ T₁ CN₁ IB₁ NR₁ M₁ Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 123, 200)` | Card creat corect |
+| **C_id** | **ID₂** UID₁ T₁ CN₁ IB₁ NR₁ M₁ Y₁ CVV₁ LIM₁ | `(0, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 123, 200)` | `IllegalArgumentException` |
+| **C_uid** | ID₁ **UID₂** T₁ CN₁ IB₁ NR₁ M₁ Y₁ CVV₁ LIM₁ | `(1, -1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 123, 200)` | `IllegalArgumentException` |
+| **C_tnull** | ID₁ UID₁ **T₂** CN₁ IB₁ NR₁ M₁ Y₁ CVV₁ LIM₁ | `(1, 1, null, "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 123, 200)` | `IllegalArgumentException` |
+| **C_tempty** | ID₁ UID₁ **T₃** CN₁ IB₁ NR₁ M₁ Y₁ CVV₁ LIM₁ | `(1, 1, "", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 123, 200)` | `IllegalArgumentException` |
+| **C_cnnull** | ID₁ UID₁ T₁ **CN₂** IB₁ NR₁ M₁ Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", null, "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 123, 200)` | `IllegalArgumentException` |
+| **C_cnempty** | ID₁ UID₁ T₁ **CN₃** IB₁ NR₁ M₁ Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", "", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 123, 200)` | `IllegalArgumentException` |
+| **C_ibnull** | ID₁ UID₁ T₁ CN₁ **IB₂** NR₁ M₁ Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", "Debit Card", null, "1234567890123456", 12, 25, 123, 200)` | `IllegalArgumentException` |
+| **C_ibempty** | ID₁ UID₁ T₁ CN₁ **IB₃** NR₁ M₁ Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", "Debit Card", "", "1234567890123456", 12, 25, 123, 200)` | `IllegalArgumentException` |
+| **C_nrnull** | ID₁ UID₁ T₁ CN₁ IB₁ **NR₂** M₁ Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", null, 12, 25, 123, 200)` | `IllegalArgumentException` |
+| **C_nrlen** | ID₁ UID₁ T₁ CN₁ IB₁ **NR₃** M₁ Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890", 12, 25, 123, 200)` | `IllegalArgumentException` |
+| **C_mlow** | ID₁ UID₁ T₁ CN₁ IB₁ NR₁ **M₂** Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 0, 25, 123, 200)` | `IllegalArgumentException` |
+| **C_mhigh** | ID₁ UID₁ T₁ CN₁ IB₁ NR₁ **M₃** Y₁ CVV₁ LIM₁ | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 13, 25, 123, 200)` | `IllegalArgumentException` |
+| **C_yneg** | ID₁ UID₁ T₁ CN₁ IB₁ NR₁ M₁ **Y₂** CVV₁ LIM₁ | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, -1, 123, 200)` | `IllegalArgumentException` |
+| **C_cvvlow** | ID₁ UID₁ T₁ CN₁ IB₁ NR₁ M₁ Y₁ **CVV₂** LIM₁ | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 99, 200)` | `IllegalArgumentException` |
+| **C_cvvhigh** | ID₁ UID₁ T₁ CN₁ IB₁ NR₁ M₁ Y₁ **CVV₃** LIM₁ | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 1000, 200)` | `IllegalArgumentException` |
+| **C_limneg** | ID₁ UID₁ T₁ CN₁ IB₁ NR₁ M₁ Y₁ CVV₁ **LIM₂** | `(1, 1, "Debit", "Debit Card", "RO49AAAA1B31007593840000", "1234567890123456", 12, 25, 123, -1)` | `IllegalArgumentException` |
 
 **17 clase → 17 reprezentanți/teste**
 
@@ -345,7 +345,7 @@ Clasele de echivalență (din EP): LIM₁ = `≥ 0`, LIM₂ = `< 0`
 
 ## 2. Setul de date de test
 
-Ceilalți parametri (cei care nu sunt variați) se fixează la valorile reprezentantului valid din EP: `id=1, userId=1, type="Debit", cardName="Debit Card", iban="RO49AAAA1B31007593840000", number="1234567890123456", month=6, year=25, cvv=500, limit=200.0`.
+Ceilalți parametri (cei care nu sunt variați) se fixează la valorile reprezentantului valid din EP: `id=1, userId=1, type="Debit", cardName="Debit Card", iban="RO49AAAA1B31007593840000", number="1234567890123456", month=6, year=25, cvv=500, limit=200`.
 
 | Test | Parametru | Valoare | Frontieră | Rezultat așteptat |
 |------|-----------|---------|-----------|-------------------|
