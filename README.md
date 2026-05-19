@@ -4,19 +4,11 @@ _Note: The project is docuemnted in the [wiki](https://github.com/Darius-Beldi/P
 This project is written in ```Java 26``` using Maven build tool. 
 
 
-| Table of Contents | 
-| --- | 
-| [Functional Testing - Boundary Value Analysis](https://github.com/Darius-Beldi/ProiectTSS/wiki/Boundary-Value-Analysis) | 
-| [Functional Testing - Equivalence Partitioning ](https://github.com/Darius-Beldi/ProiectTSS/wiki/Equivalence-Partitioning-Tests) | 
-| [Structural Testing - Instruction, Decision & Conditional Coverage](https://github.com/Darius-Beldi/ProiectTSS/wiki/Structural-Testing) | 
 # Dependencies
 The external libraries used, and imported through Maven are : 
 - ```JUnit 5.1.0.2```, the framework used to run the tests
 - ```Mockito 5.14.2```, the framework that allowed creating mocks of classes to bypass the database queries 
-
-# Results
-<img width="715" height="711" alt="image" src="https://github.com/user-attachments/assets/29cc072b-0b15-43a6-94e2-b184522b71a0" />
-
+- ```Pitest 1.16.1```, the frameworkt that allows the mutation testing
 
 # Sources used 
 - [Junit Documentation ](https://junit.org/)
@@ -49,11 +41,6 @@ public static String Crypt(String input) throws NoSuchAlgorithmException
 | `testCrypt_ValidString` | C₁ | `"parola123"` | `"095b2626c9b6bad0eb89019ea6091bd9"` |
 | `testCrypt_NullString` | C₂ | `null` | `NullPointerException` |
  
-
-
-
-
-
 
 
 
@@ -381,11 +368,7 @@ Ceilalți parametri (cei care nu sunt variați) se fixează la valorile reprezen
 
 
 
-# Functional Testing
-
-
-
-
+# Structural Testing
 
 
 
